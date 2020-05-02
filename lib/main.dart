@@ -28,7 +28,9 @@ class MyHomePageState extends State<MyHomePage> {
 
   Future<void> _refresh() async {
     // ローディング
-    isLoading = true;
+    setState(() {
+      isLoading = true;
+    });
 
     // 1秒待つ
     await Future.delayed(Duration(seconds: 1));
@@ -42,7 +44,9 @@ class MyHomePageState extends State<MyHomePage> {
     await Future.delayed(Duration(seconds: 1));
 
     // ロード終わり
-    isLoading = false;
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override

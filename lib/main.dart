@@ -59,7 +59,7 @@ class MyHomePageState extends State<MyHomePage> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () async {
-                  await showDialog(
+                  showDialog(
                     context: context,
                     builder: (context) {
                       return AlertDialog(
@@ -67,14 +67,19 @@ class MyHomePageState extends State<MyHomePage> {
                         actions: <Widget>[
                           FlatButton(
                             child: Text('ok'),
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: () async {
+                              await _refresh();
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MySecondScreen()));
+                            }
+                          ),
+                          FlatButton(
+                            child: Text('キャンセル'),
+                            onPressed: () => Navigator.of(context).pop(false),
                           ),
                         ],
                       );
                     }
                   );
-                  await  _refresh();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => MySecondScreen()));
                 },
                 child: Card(
                   child: Padding(
